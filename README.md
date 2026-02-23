@@ -28,43 +28,43 @@ Identify IP address using ifconfig in Metasploitable2
 Use the above ip address to access the apache webserver of Metasploitable2 from kali/parrot linux. In Kali Linux use the ip address in a web browser.
 ##  OUTPUT
 
+<img width="711" height="436" alt="image" src="https://github.com/user-attachments/assets/fb744a1f-e7db-4172-9878-60ec14bc2606" />
 
 Select Multidae from the menu listed as shown above. The page is displayed as below:
 ##  OUTPUT
 
-
+<img width="942" height="686" alt="image" src="https://github.com/user-attachments/assets/a3e69988-6061-49eb-9215-038f3ae8fc60" />
 
 Click on the menu Login/Register and register for an account
 ##  OUTPUT
 
-
+<img width="945" height="992" alt="image" src="https://github.com/user-attachments/assets/4a628612-8491-4784-ab99-e78a6dfa5c91" />
 
 Click on the link “Please register here”
 ##  OUTPUT
 
-
+<img width="945" height="990" alt="image" src="https://github.com/user-attachments/assets/b2f21d82-5b3b-4fdf-a689-bbfd10dc382e" />
 
 Click on “Create Account” to display the following page:
 ##  OUTPUT
 
+<img width="950" height="948" alt="image" src="https://github.com/user-attachments/assets/d9aae6dc-a836-402e-9a62-e2fdf8f130af" />
+
 
 The login structure we will use in our examples is straightforward. It contains two input fields (username and password), which are both vulnerable. The back-end content creates a query to approve the username and secret key given by the client. Here is an outline of the page rationale:
-
 
 ($query = “SELECT * FROM users WHERE username=’$_POST[username]’ AND password=’$_POST[password]’“;).
  For the username put “ganesh” or “anything” and for the password put (anything’ or ‘1’=’1) or (admin’ or ‘1’=’1) then try to log in, and you’ll be presented with an admin login page.
 ##  OUTPUT
 
-
+<img width="835" height="562" alt="image" src="https://github.com/user-attachments/assets/dd28fc36-79fd-439b-9c56-44d60092e5f1" />
 
 Click “Login”. The logged in page will show as below:
 ##  OUTPUT
 
-
+<img width="949" height="947" alt="image" src="https://github.com/user-attachments/assets/956a9dba-30d0-45e2-b4d0-acc8ae4da05d" />
 
 If error faced in registration follow the following steps in metasploitable 2:
-
-
 This issue is caused by a misconfiguration in the config.inc located in the /var/www/mutillidae folder on Metasploitable 2 VM.
 
 Edit config.inc
@@ -73,49 +73,24 @@ cd /
 sudo nano /var/www/mutillidae/config.inc
 Type msfadmin when prompted for the root password. 
 Once nano opens config.inc file, look for the line $dbname = ‘metasploit’ as shown in Figure  below:
-##  OUTPUT
-
-
 Replace ‘metasploit’ with ‘owasp10’ and make sure the lines end with semicolon ; as shown in Figure
-##  OUTPUT
-
-
-
-
 Save and exit the config.inc
 Save than exit the config.inc file by typing CTRL+X keys on your keyboard and the Y [Enter] when prompted to save the file
 Restart the Apache server
 To restart Apache, type the following command in the terminal. Alternatively, you can just reboot Metasploitalbe 2 VM.
 sudo /etc/init.d/apache2 reload
-##  OUTPUT
-
-
-
-
 # Reset Mutillidae database
 Refresh the page then clicking on the Reset DB menu option to reset the Mutillidae database [Figure ]. Click OK when prompted.
-##  OUTPUT
-
-
-
-
-
 # Test the new configuration
 Alright. Now is time to test if we managed to fix the database issue. Go ahead and register a new account on the Mutillidae webpage.
-
  The Mutillidae database error no longer appears 
-#OUTPUT
-
-
-
+## OUTPUT
+ <img width="953" height="876" alt="image" src="https://github.com/user-attachments/assets/b43ef6cf-fab5-4b67-b41f-4f315e8d0fd5" />
 Now after logging out you will see the login page. In the login page give ganesh’ # (myusername). You can see the page now enters into the administrator page as before when giving the password.
-#OUTPUT
-
-
 Click the login button and you will see it enter into the administrator page.
-#OUTPUT
+## OUTPUT
 
-
+<img width="943" height="879" alt="image" src="https://github.com/user-attachments/assets/6df451b1-4bca-417e-b9be-8b484bb723c5" />
 
 ## Union-based SQL injection
 
@@ -125,6 +100,7 @@ we will be using the “User Info” page from Mutillidae to perform a Union-Bas
 After logging out, Now choose the menu as shown below:
 ##  OUTPUT
 
+<img width="952" height="181" alt="image" src="https://github.com/user-attachments/assets/24ce7b2b-f03e-41fe-a00b-5c6d0af33020" />
 
 
 From this point, all our attack vectors will be performed in the URL section of the page using the Union-Based technique.There are two different ways to discover how many columns are selected by the original query. The first is to infuse an “ORDER BY” statement indicating a column number. Given the column number specified is higher than the number of columns in the “SELECT” statement, an error will be returned.
