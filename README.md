@@ -1,172 +1,140 @@
-# sqlinjection
+## sqlinjection
 Exploiting SQL Injection vulnerability
 
-# AIM:
+## AIM:
 To exploit SQL Injection vulnerability using Multidae web application in Metasploitable2
 
 ## DESIGN STEPS:
-
-### Step 1:
-
+Step 1:
 Install kali linux either in partition or virtual box or in live mode
 
-### Step 2:
-
+Step 2:
 Investigate on the various categories of tools as follows:
 
-### Step 3:
-
+Step 3:
 Open terminal and try execute some kali linux commands
 
 ## EXECUTION STEPS AND ITS OUTPUT:
+SQL Injection is a sort of infusion assault that makes it conceivable to execute malicious SQL statements. These statements control a database server behind a web application. Assailants can utilize SQL Injection vulnerabilities to sidestep application safety efforts. They can circumvent authentication and authorization of a page or web application and recover the content of the whole SQL database. Identify IP address using ifconfig in Metasploitable2
 
-SQL Injection is a sort of infusion assault that makes it conceivable to execute malicious SQL statements. These statements control a database server behind a web application. Assailants can utilize SQL Injection vulnerabilities to sidestep application safety efforts. They can circumvent authentication and authorization of a page or web application and recover the content of the whole SQL database. 
-Identify IP address using ifconfig in Metasploitable2
-# OUTPUT
+<img width="1919" height="963" alt="image" src="https://github.com/user-attachments/assets/2e69ecb6-8226-4176-a9a4-f13e145d5ac0" />
 
-<img width="718" height="407" alt="image" src="https://github.com/user-attachments/assets/59bda18f-9cb7-43a9-81d3-e1525060824a" />
 
-Use the above ip address to access the apache webserver of Metasploitable2 from kali/parrot linux. In Kali Linux use the ip address in a web browser.
-##  OUTPUT
+Use the above ip address to access the apache webserver of Metasploitable2 from kali linux. In Kali Linux use the ip address in a web browser. 
 
-<img width="963" height="584" alt="image" src="https://github.com/user-attachments/assets/31706bce-772a-4b6d-a440-50fb6084924a" />
+<img width="1276" height="691" alt="image" src="https://github.com/user-attachments/assets/f663fcf4-bbc0-4b52-9fe6-2525854e2198" />
 
-Select Multidae from the menu listed as shown above. The page is displayed as below:
-##  OUTPUT
+Select Multidae from the menu listed as shown above. You will get the page as displayed below:
 
-<img width="956" height="876" alt="image" src="https://github.com/user-attachments/assets/93d8689a-d824-4a2e-b4e9-a11e7403be49" />
+<img width="1907" height="899" alt="image" src="https://github.com/user-attachments/assets/e2c19e77-492e-4840-ae73-03a852f7a4ed" />
 
 Click on the menu Login/Register and register for an account
-##  OUTPUT
 
-<img width="951" height="878" alt="image" src="https://github.com/user-attachments/assets/4b95e087-e7c2-4f92-bf29-5817664274c1" />
+<img width="1919" height="884" alt="image" src="https://github.com/user-attachments/assets/bb1d88e5-d7ba-4360-8826-06da0b8ea696" />
 
-Click on the link “Please register here”
-##  OUTPUT
 
-<img width="954" height="881" alt="image" src="https://github.com/user-attachments/assets/ced5f918-53d2-447a-a968-cd2d1a9a004f" />
 
-Click on “Create Account” to display the following page:
-##  OUTPUT
+Click on the link “Please register here” Screenshot 
 
-<img width="952" height="876" alt="image" src="https://github.com/user-attachments/assets/6875d301-38d4-4b3a-a5cd-a948501a6514" />
+<img width="1920" height="894" alt="image" src="https://github.com/user-attachments/assets/9d4c6b78-b4aa-42d5-a610-16d9e5c03e4b" />
+
+Click on “Create Account” to display the following page: 
+
+<img width="1919" height="789" alt="image" src="https://github.com/user-attachments/assets/98772697-0eae-4775-a947-6954e4af2192" />
 
 The login structure we will use in our examples is straightforward. It contains two input fields (username and password), which are both vulnerable. The back-end content creates a query to approve the username and secret key given by the client. Here is an outline of the page rationale:
 
+($query = “SELECT * FROM users WHERE username=’$_POST[username]’ AND password=’$_POST[password]’“;). For the username put “ganesh” or “anything” and for the password put (anything’ or ‘1’=’1) or (admin’ or ‘1’=’1) then try to log in, and you’ll be presented with an admin login page.
 
-($query = “SELECT * FROM users WHERE username=’$_POST[username]’ AND password=’$_POST[password]’“;).
- For the username put “ganesh” or “anything” and for the password put (anything’ or ‘1’=’1) or (admin’ or ‘1’=’1) then try to log in, and you’ll be presented with an admin login page.
-##  OUTPUT
-
-<img width="951" height="876" alt="image" src="https://github.com/user-attachments/assets/ff497696-2274-484e-8ff5-c3e952ef2cdc" />
-
-Click “Login”. The logged in page will show as below:
-##  OUTPUT
-
-<img width="949" height="876" alt="image" src="https://github.com/user-attachments/assets/582ae3fd-6a3e-4128-8f49-e486e78577db" />
+<img width="1903" height="897" alt="image" src="https://github.com/user-attachments/assets/9b0ad64d-f3ff-41cf-a026-38b1e4563d24" />
 
 
-If error faced in registration follow the following steps in metasploitable 2:
-This issue is caused by a misconfiguration in the config.inc located in the /var/www/mutillidae folder on Metasploitable 2 VM.
-Edit config.inc
-Edit config.inc file located in /var/www/mutillidae folder on Metasploitable 2 by typing the following commands [one at the time]:
-cd /
-sudo nano /var/www/mutillidae/config.inc
-Type msfadmin when prompted for the root password. 
-Once nano opens config.inc file, look for the line $dbname = ‘metasploit’ as shown in Figure  below:
-Replace ‘metasploit’ with ‘owasp10’ and make sure the lines end with semicolon ; as shown in Figure
-Save and exit the config.inc
-Save than exit the config.inc file by typing CTRL+X keys on your keyboard and the Y [Enter] when prompted to save the file
-Restart the Apache server
-To restart Apache, type the following command in the terminal. Alternatively, you can just reboot Metasploitalbe 2 VM.
-sudo /etc/init.d/apache2 reload##  OUTPUT
-Reset Mutillidae database
-Refresh the page then clicking on the Reset DB menu option to reset the Mutillidae database [Figure ]. Click OK when prompted.
-# Test the new configuration
-Alright. Now is time to test if we managed to fix the database issue. Go ahead and register a new account on the Mutillidae webpage.
- The Mutillidae database error no longer appears 
-Now after logging out you will see the login page. In the login page give ganesh’ # (myusername). You can see the page now enters into the administrator page as before when giving the password.
-# OUTPUT
+Click “Login”. The logged in page will show as below: 
 
-<img width="952" height="877" alt="image" src="https://github.com/user-attachments/assets/65c44bf7-d156-4ccf-a3b3-02db1c6b760b" />
+<img width="887" height="643" alt="image" src="https://github.com/user-attachments/assets/4fc1b245-c655-488a-8cde-b12739718afe" />
+
+
+## Bypassing login field
+
+The username field is vulnerable. Put (ganesh’ #) or (ganesh’--) in the username field and hit “Enter” to log in. We use “#” or “--” to comment everything in the query sentence that comes after the username filed telling the database to disregard the password field: (SELECT * FROM users WHERE username=’admin’ # AND password=’ ‘). By using line commenting, the aggressor eliminates a part of the login condition and gains access. This technique will make the “WHERE” clause true only for one user; in this case, it is “ganesh.”
+
+Now after logging out you will see the login page. In the login page give ganesh’ # . You can see the page now enters into the administrator page as before when giving the password.
+
+<img width="1914" height="886" alt="image" src="https://github.com/user-attachments/assets/159aba13-ec7c-4fa9-b68c-da2cebbc5f88" />
+
 
 Click the login button and you will see it enter into the administrator page.
-# OUTPUT
 
-<img width="954" height="875" alt="image" src="https://github.com/user-attachments/assets/7f9dbed9-4541-4fcd-8630-134ecbd54c72" />
+<img width="1920" height="880" alt="image" src="https://github.com/user-attachments/assets/86dc8303-41d0-49c4-ac2d-d0109c11c2de" />
+
+
 
 ## Union-based SQL injection
+UNION-based SQL injection assaults enable the analyzer to extract data from the database effectively. Since the “UNION” operator must be utilized if the two inquiries have precisely the same structure, the attacker must craft a “SELECT” statement like the first inquiry. we will be using the “User Info” page from Mutillidae to perform a Union-Based SQL injection attack. Go to “OWASP Top 10/A1 — Injection/SQLi — Extract-Data/User Info”
 
-UNION-based SQL injection assaults enable the analyzer to extract data from the database effectively. Since the “UNION” operator must be utilized if the two inquiries have precisely the same structure, the attacker must craft a “SELECT” statement like the first inquiry. 
-we will be using the “User Info” page from Mutillidae to perform a Union-Based SQL injection attack. Go to “OWASP Top 10/A1 — Injection/SQLi — Extract-Data/User Info” 
+After logging out, Now choose the menu as shown below: 
 
-After logging out, Now choose the menu as shown below:
-##  OUTPUT
+<img width="1915" height="592" alt="244885675-123993df-2a2b-455f-abde-8904a72314dd" src="https://github.com/user-attachments/assets/966dd92c-cb9e-492e-bae5-9a7c0a44e754" />
 
-<img width="838" height="749" alt="image" src="https://github.com/user-attachments/assets/6ae95fcc-196c-495c-9a3c-e43fc0f3e4f4" />
+<img width="1919" height="896" alt="244885678-9b365f7e-d511-4ff4-a5fb-d33ee779cb86" src="https://github.com/user-attachments/assets/0622d635-e00e-4972-b366-204427032fa8" />
 
 
-From this point, all our attack vectors will be performed in the URL section of the page using the Union-Based technique.There are two different ways to discover how many columns are selected by the original query. The first is to infuse an “ORDER BY” statement indicating a column number. Given the column number specified is higher than the number of columns in the “SELECT” statement, an error will be returned.
-##  OUTPUT
+<img width="1912" height="905" alt="244885683-7b70cf08-aa04-4ba1-b7e5-12f048c98c57" src="https://github.com/user-attachments/assets/05d8ef7a-e5f2-443b-b01a-a1bbdf5eadfc" />
 
+<img width="1436" height="692" alt="244885840-713a7087-4c4a-49a0-8c23-92af437df4b1" src="https://github.com/user-attachments/assets/d14cf7c9-fce4-4534-b7e5-760f8a26cfb5" />
+
+
+<img width="1414" height="783" alt="244885834-a242176f-df4f-4eb2-8296-0671fd7d7264" src="https://github.com/user-attachments/assets/15e6df71-fee6-4b9a-a8a8-c3a522ccd7fc" />
+
+ 
+ From this point, all our attack vectors will be performed in the URL section of the page using the Union-Based technique.There are two different ways to discover how many columns are selected by the original query. The first is to infuse an “ORDER BY” statement indicating a column number. Given the column number specified is higher than the number of columns in the “SELECT” statement, an error will be returned. 
+
+ <img width="1762" height="685" alt="244885838-10c8f015-3770-46b5-b320-bf37cc7bbdae" src="https://github.com/user-attachments/assets/d0c3e31c-a533-462b-b388-b7abf2e1995e" />
 
 
 Since we do not know the number of columns, we start at 1. To find the exact amount of columns, the number is incremented until an error related to the “ORDER BY” clause is returned. In this example, we incremented it to 6 and received an error message, so it means that the number of columns is lower than 6.
 
 The browser url of this info page need to be modified with the url as below:
-##  OUTPUT
 
-
+<img width="1828" height="878" alt="244885847-0eb340b9-63a6-433e-878b-45f3b396f1a2" src="https://github.com/user-attachments/assets/83eb8031-01d6-406d-b1ca-3903fa81c8c7" />
 
 
 After adding the order by 6 into the existing url , the following error statement will be obtained:
-##  OUTPUT
 
-
+<img width="1828" height="878" alt="244885847-0eb340b9-63a6-433e-878b-45f3b396f1a2" src="https://github.com/user-attachments/assets/21a75b25-b6b9-42b0-8107-24e5e84e64f0" />
 
 
 When we ordered by 5, it worked and displayed some information. It means there are five columns that we can work with. Following screenshot shows that the url modified to have statement added with ordered by 5 replacing 6.
-#OUTPUT
+
+<img width="1770" height="547" alt="244885848-86073e2f-937b-47a4-9b9d-c0c2863b2a7c" src="https://github.com/user-attachments/assets/10a5bda7-0c0d-4c0b-8bd5-b37fe514d8c3" />
 
 
+As it is having 5 columns the query worked fine and it provides the correct result
+
+<img width="1518" height="783" alt="244885850-7a660480-5cb6-4d86-acd1-08f7a4d5e2fa" src="https://github.com/user-attachments/assets/77fb28a0-2f4b-438b-a8a7-eb01854c8d27" />
 
 
- As it is having 5 columns the query worked fine and it provides the correct result
-##  OUTPUT
+Instead of using the "order by" option, let’s use the "union select" option and provide all five columns. Ex: (union select 1,2,3,4,5)
+
+<img width="1772" height="365" alt="244885874-1c7ac260-3410-4f75-8091-2cda6b7f20c0" src="https://github.com/user-attachments/assets/69d184b4-b4b7-4005-aabc-ed116d6eb959" />
+
+As given in the screenshot below columns 2,3,4 are usable in which we can substitute any sql commands to extract necessary information. 
+
+<img width="1275" height="705" alt="244885894-12ebac90-8efb-4558-a442-541029220fa3" src="https://github.com/user-attachments/assets/52e34725-0865-485e-9e9c-4b21231b4fd3" />
+
+ 
+ Now we will substitute some few commands like database(), user(), version() to obtain the information regarding the database name, username and version of the database.
+
+<img width="1681" height="838" alt="244885896-78ba6fc7-7ab6-4c39-8a7f-c8e4240775b8" src="https://github.com/user-attachments/assets/bf31564d-0d79-47dc-97c5-098e129c8073" />
+
+The url when executed, we obtain the necessary information about the database name owasp10, username as root@localhost and version as 5.0.51a-3ubuntu5. In MySQL, the table “information_schema.tables” contains all the metadata identified with table items. Below is listed the most useful information on this table.
+
+Replace the query in the url with the following one: union select 1,table_name,null,null,5 from information_schema.tables where table_schema = ‘owasp10’
+
+<img width="1907" height="885" alt="244885899-68ccd33b-a98d-4ff6-8c19-57e63c2724d0" src="https://github.com/user-attachments/assets/ee35eca0-9a49-4903-b3c9-0ba90251b356" />
 
 
-
-
-Instead of using the "order by" option, let’s use the "union select" option and provide all five columns. Ex: (union select 1,2,3,4,5).
-##  OUTPUT
-
-
-
-As given in the screenshot below columns 2,3,4 are usable in which we can substitute any sql commands to extract necessary information.
-##  OUTPUT
-
-
-
-
-
-
-Now we will substitute some few commands like database(), user(), version() to obtain the information regarding the database name, username and version of the database.
-##  OUTPUT
-
-
-
-The url when executed, we obtain the necessary information about the database name owasp10, username as root@localhost and version as 5.0.51a-3ubuntu5.
-In MySQL, the table “information_schema.tables” contains all the metadata identified with table items. Below is listed the most useful information on this table.
-
-Replace the query in the url with the following one:
-union select 1,table_name,null,null,5 from information_schema.tables where table_schema = ‘owasp10’
-##  OUTPUT
-
-
-
-
-The url once executed will  retrieve table names from the “owasp 10” database.
-##Extracting sensitive data such as passwords 
+The url once executed will retrieve table names from the “owasp 10” database. ##Extracting sensitive data such as passwords
 
 When the attacker knows table names, he needs to discover what the column names are to extract data.
 
@@ -175,18 +143,20 @@ In MySQL, the table “information_schema.columns” gives data about columns in
 Ex: (union select 1,colunm_name,null,null,5 from information_schema.columns where table_name = ‘accounts’).
 
 Here we are trying to extract column names from the “accounts” table.
-##  OUTPUT
 
+<img width="1920" height="900" alt="244885902-c820f87a-30cb-485b-b423-f6fd0e67c96e" src="https://github.com/user-attachments/assets/ba414ec3-5a0c-4799-a51a-5856f14fbf96" />
 
 
 The column names of the accounts is displayed below for the following url:
+
+<img width="1920" height="900" alt="244885902-c820f87a-30cb-485b-b423-f6fd0e67c96e" src="https://github.com/user-attachments/assets/730d5289-fe32-4681-814f-fb2c1cf309ce" />
 
 
 Once we discovered all available column names, we can extract information from them by just adding those column names in our query sentence.
 
 Ex: (union select 1,username,password,is_admin,5 from accounts).
-##  OUTPUT
 
+<img width="1918" height="906" alt="244885903-f7dd79fb-c11c-41f3-8019-06685e9cd759" src="https://github.com/user-attachments/assets/a0d9221f-2e25-41c7-b27b-e1def55e8bce" />
 
 
 ## Reading and writing files on the web-server
@@ -194,9 +164,9 @@ We can use the “LOAD_FILE()” operator to peruse the contents of any file con
 
 Ex: (union select null,load_file(‘/etc/passwd’),null,null,null).
 
+<img width="1918" height="908" alt="244885909-13f4a113-06fc-4d62-a8ec-6525c4ec1343" src="https://github.com/user-attachments/assets/7b30965f-dcbf-4bef-bb91-552524fd5240" />
 
-##  OUTPUT
-
+the “INTO_OUTFILE()” operator for all that they offer and attempt to root the objective server by transferring a shell-code through SQL infusion. we will write a “Hello World!” sentence and output it in the “/tmp/” directory as a “hello.txt” file. This “Hello World!” sentence can be substituted with any PHP shell-code that you want to execute in the target server. Ex: (union select null,’Hello World!’,null,null,null into outfile ‘/tmp/hello.txt’).
 
 ## RESULT:
 The SQL Injection vulnerability is successfully exploited using the Multidae web application in Metasploitable2.
